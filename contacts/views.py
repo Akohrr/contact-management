@@ -18,3 +18,8 @@ class ListContact(generics.ListAPIView):
 class ViewContact(generics.RetrieveAPIView):
     queryset = Contact.objects.all()
     serializer_class = ContactSerializer
+
+
+class UpdateContact(generics.RetrieveUpdateAPIView):
+    queryset = Contact.objects.all()
+    serializer_class = ContactSerializer
