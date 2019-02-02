@@ -8,3 +8,8 @@ from .serializers import ContactSerializer
 
 class CreateContact(generics.CreateAPIView):
     serializer_class = ContactSerializer
+
+
+class ListContact(generics.ListAPIView):
+    queryset = Contact.objects.all()
+    serializer_class = ContactSerializer
