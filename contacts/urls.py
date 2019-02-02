@@ -6,5 +6,5 @@ app_name = 'contacts'
 
 
 urlpatterns = [
-    path('new', views.CreateContact.as_view())
+    path('new', views.CreateContact.as_view(), name='new_contact'),
 ]
