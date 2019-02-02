@@ -18,3 +18,6 @@ class Contact(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     work_phone = models.CharField(max_length=15)
     profile_image = models.ImageField(upload_to=contact_picture_directory_path, blank=True)
+
+    def __str__(self):
+        return self.name
