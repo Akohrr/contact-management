@@ -6,6 +6,5 @@ from .models import Contact
 from .serializers import ContactSerializer
 
 
-class ContactList(generics.ListCreateAPIView):
-    queryset = Contact.objects.all()
+class CreateContact(generics.CreateAPIView):
     serializer_class = ContactSerializer
