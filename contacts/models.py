@@ -7,7 +7,7 @@ from accounts.models import User
 
 
 def contact_picture_directory_path(instance, filename):
-    upload_to = 'media/contacts/{0}'.format(instance.owner.username)
+    upload_to = 'contacts/{0}'.format(instance.owner.username)
     ext = filename.split('.')[-1]
     filename = '{0}.{1}'.format(instance.name, ext)
     return os.path.join(upload_to, filename)
