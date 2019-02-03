@@ -3,6 +3,7 @@ from rest_framework import status
 from rest_framework.test import APITestCase
 
 from accounts.models import User
+from contacts.models import Contact
 
 
 class BaseTestClass(APITestCase):
@@ -58,4 +59,28 @@ class TestCreateContactView(BaseTestClass):
         self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + self.access_token)
         response = self.client.post(self.url, test_data)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+
+# test for DELETE request
+class TestDeleteContactView(BaseTestClass):
+    def setUp(self):
+        super().setUp()
+        test_data = {
+            'name': 'testname',
+            'address': 'testaddress',
+            'owner': self.user,
+            'work_phone': '2348123456789'
+        }
+        self.contact = Contact.objects.create(**test_data)
+        self.url = reverse('contacts:delete_contact', kwargs={'pk': self.contact.id})
+
+    def test_get_request_with_authenticated_user(self):
+        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + self.access_token)
+        response = self.client.get(self.url)
+        self.assertEqual(response.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
+
+    def test_delete_request_with_authenticated_user(self):
+        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + self.access_token)
+        response = self.client.delete(self.url)
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 

@@ -35,6 +35,6 @@ class UpdateContact(generics.RetrieveUpdateAPIView):
 
 # DELETE Endpoint
 class DeleteContact(generics.DestroyAPIView):
-    permission_classes = (IsAuthenticated, )
+    # permission_classes = (IsAuthenticated, )
     queryset = Contact.objects.all()
     serializer_class = ContactSerializer
