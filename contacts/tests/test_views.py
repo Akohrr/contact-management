@@ -16,7 +16,6 @@ class BaseTestClass(APITestCase):
         self.user = User.objects.create_user(
             username=self.username, password=self.password, email='testemail@test.com')
         self.token_url = reverse('token_obtain_pair')
-        self.url = reverse('contacts:new_contact')
         token_resp = self.client.post(self.token_url, self.data)
         self.assertEqual(token_resp.status_code, status.HTTP_200_OK)
         self.access_token = token_resp.data['access']
@@ -24,6 +23,7 @@ class BaseTestClass(APITestCase):
 
 # test for POST request
 class TestCreateContactView(BaseTestClass):
+    url = reverse('contacts:new_contact')
 
     def test_unauthenticated_user(self):
         response = self.client.get(self.url)
