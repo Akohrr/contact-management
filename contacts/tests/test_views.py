@@ -43,12 +43,12 @@ class TestCreateContactView(BaseTestClass):
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
-    def test_get_request(self):
+    def test_get_request_with_authenticated_user(self):
         self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + self.access_token)
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
 
-    def test_post_request(self):
+    def test_post_request_with_authenticated_user(self):
         test_data = {
             'name': 'testname',
             'address': 'testaddress',
