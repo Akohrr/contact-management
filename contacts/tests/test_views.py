@@ -4,8 +4,8 @@ from rest_framework.test import APITestCase
 
 from accounts.models import User
 
-# test for POST request
-class TestCreateContactView(APITestCase):
+
+class BaseTestClass(APITestCase):
     def setUp(self):
         self.username = 'testusername'
         self.password = 'aodhoihdaldhfl'
@@ -21,6 +21,9 @@ class TestCreateContactView(APITestCase):
         self.assertEqual(token_resp.status_code, status.HTTP_200_OK)
         self.access_token = token_resp.data['access']
 
+
+# test for POST request
+class TestCreateContactView(BaseTestClass):
 
     def test_unauthenticated_user(self):
         response = self.client.get(self.url)
