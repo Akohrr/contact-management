@@ -21,6 +21,20 @@ class BaseTestClass(APITestCase):
         self.access_token = token_resp.data['access']
 
 
+# test for GET request
+class TestListContactView(BaseTestClass):
+    url = reverse('contacts:list_contact')
+
+    def test_unauthenticated_user(self):
+        response = self.client.get(self.url)
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+    def test_get_request_with_authenticated_user(self):
+        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + self.access_token)
+        response = self.client.get(self.url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+
 # test for POST request
 class TestCreateContactView(BaseTestClass):
     url = reverse('contacts:new_contact')
