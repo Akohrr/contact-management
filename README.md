@@ -48,10 +48,10 @@ Create database
 $ python manage.py migrate
 ```
 
-Create user
+Create admin user
 
 ```
-$ python manage.py createsuperuser --
+$ python manage.py createsuperuser
 ```
 Finally, run the development server
 
